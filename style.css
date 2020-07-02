@@ -2,6 +2,10 @@ body {
     background-color: #BCF8EC;
 }
 
+#mainBox {
+    display: flex;
+}
+
 #gridContainer {
     display: block;
     margin: 0 auto;
@@ -16,7 +20,7 @@ body {
     h1 {
         text-align: center;
         font-family: 'Yellowtail', cursive;
-        font-size: 120px;
+        font-size: 80px;
         font-weight: lighter;
         margin-top: 0;
         margin-bottom: -10px;
@@ -24,37 +28,38 @@ body {
 
     button {
         display: block;
-        width: 250px;
-        margin: 25px auto;
+        width: 80%;
+        margin: 5px auto;
         font-size: 20px;
         background-color: #9FA0C3;
         color: white;
         border-radius: 25px;
     }
 
-    #sideBox {
-        position: fixed;
-        width: 300px;
-        height: 500px;
+    #configBox {
+        display: block;        
+        width: 500px;
+        height: 150px;
         background-color: #AED9E0;
-        margin-top: 175px;
-        margin-left: 175px; 
+        margin: 20px auto;
         border-radius: 25px;
         text-align: center;
-        font-size: 30px;
-        box-shadow: darkslategray 10px 10px 10px;
+        font-size: 30px;        
         color: white;
+        box-shadow: darkslategray 10px 10px 10px;  
+        padding-top: 15px;      
     }
 
     #coloursBox {
-        display: flex;;
-        justify-content: space-evenly;
+        display: flex;
+        justify-content: center;
     }
 
     .colours {
         width: 50px;
         height: 50px;
         border-radius: 30%;
+        margin: 10px;
     }
 
     #black {
@@ -65,6 +70,24 @@ body {
         background-color: red;
     }
 
-    #random {
+    #rainbow {
         background: linear-gradient(90deg, red, green, blue);;
     }
+
+    @media only screen and (max-width: 1500px) {
+        #sideBox {
+            margin-left: 125px;
+                }  
+        }
+      
+        @media only screen and (max-width: 1300px) {
+            #sideBox {
+                margin-left: 75px;
+                    }  
+            }
+
+            @media only screen and (max-width: 1100px) {
+                #sideBox {
+                    margin-left: 0px;
+                        }  
+                }

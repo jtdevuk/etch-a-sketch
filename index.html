@@ -8,20 +8,22 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        <h1>Etch-a-Sketch</h1>
-        <div id="sideBox">
-            <button>Reset and resize grid</button>
-            <p>Colours:</p>
-            <div id="coloursBox">
-                <div id="black" class="colours"></div>
-                <div id="red" class="colours"></div>
-                <div id="random" class="colours"></div>
-            </div>
-        </div>        
+        <h1>Etch-a-Sketch</h1>      
+            
         <div id="gridContainer">                  
-        </div>               
+        </div> 
+         
+        <div id="configBox">
+            <button id="resetButton">Clear</button>
+            <button id="resizeButton">Change the grid size</button>            
+        <div id="coloursBox">
+            <div id="black" class="colours"></div>
+            <div id="red" class="colours"></div>
+            <div id="rainbow" class="colours"></div>
+        </div>
+                      
         <script>
-            let userColour = "rainbow";
+            let userColour = "black";
             let gridContainer = document.querySelector('#gridContainer');            
 
             function createCssGrid(size) {                                      
@@ -36,49 +38,68 @@
             
             function createGridSquares(size) { 
 
-            for (let i = 0; i < size**2; i++) {                
-                let gridSquare = document.createElement('div');                
-                gridSquare.classList.add('gridSquare');                                                     
-                gridContainer.appendChild(gridSquare);                
+                for (let i = 0; i < size**2; i++) {                
+                    let gridSquare = document.createElement('div');                
+                    gridSquare.classList.add('gridSquare');                                                     
+                    gridContainer.appendChild(gridSquare);                 
 
-                // gridSquare.addEventListener('mouseenter', () => {
-                //     gridSquare.style.backgroundColor = "black";
-                // });
-
-                gridSquare.addEventListener('mouseover', () => {
-                    
-                    if (userColour == "black") {
-                        gridSquare.style.backgroundColor = "black";
-                    } else if (userColour == "red") {
-                        gridSquare.style.backgroundColor = "red";
-                    } else if (userColour == "rainbow") {
+                    gridSquare.addEventListener('mouseover', () => {
                         
-                        let red = Math.floor((Math.random() * 255) + 1);
-                        let green = Math.floor((Math.random() * 255) + 1);
-                        let blue = Math.floor((Math.random() * 255) + 1);
-                        gridSquare.style.backgroundColor = `rgb(${red}, ${green}, ${blue}`;
-                    }
-
-
-                });
-               
+                        if (userColour == "black") {
+                            gridSquare.style.backgroundColor = "black";
+                        } else if (userColour == "red") {
+                            gridSquare.style.backgroundColor = "red";
+                        } else if (userColour == "rainbow") {
+                            
+                            let red = Math.floor((Math.random() * 255) + 1);
+                            let green = Math.floor((Math.random() * 255) + 1);
+                            let blue = Math.floor((Math.random() * 255) + 1);
+                            gridSquare.style.backgroundColor = `rgb(${red}, ${green}, ${blue}`;
+                        }
+                    });                
                 }
             }    
-
+            // remove all the old squares before making new ones
             function clearGrid() {
-                let container = document.querySelector('#gridContainer');
                 
+                let container = document.querySelector('#gridContainer');                
                 let square = document.querySelectorAll('.gridSquare');
                 square.forEach(function(e){
                     container.removeChild(container.lastChild);
                 });
+            }
+                
+                document.querySelector('#resizeButton').onclick = function() {     
+                               
+                    let newGrid = prompt("How many squares in each direction should the grid have? (1-128)");
+                
+                    if(newGrid <= 128 && newGrid >=1) {
+                        clearGrid();
+                        createCssGrid(newGrid);                    
+                    } else {
+                        alert("Please choose a number between 1 and 128");  
+                    }                
+                
+                }
 
-                }                   
+                document.querySelector('#resetButton').onclick = function() {                
+                    let square = document.querySelectorAll('.gridSquare');
+                    square.forEach(function(e){                    
+                    e.style.backgroundColor = "white";
+                    
+                });
+            }
 
-                document.querySelector('button').onclick = function() {                
-                let newGrid = prompt("How many squares in each direction should the grid have? (1-64)");
-                clearGrid();
-                createCssGrid(newGrid);
+            document.querySelector('#black').onclick = function() {
+                userColour = "black";
+            }
+            
+            document.querySelector('#red').onclick = function() {
+                userColour = "red";
+            }
+
+            document.querySelector('#rainbow').onclick = function() {
+                userColour = "rainbow";
             }
 
         </script>
