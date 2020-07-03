@@ -21,62 +21,52 @@
             <div id="black" class="colours"></div>
             <div id="red" class="colours"></div>
             <div id="rainbow" class="colours"></div>
-        </div>
-                      
+        </div>                      
         <script>
             let userColour = "black";
-            let gridContainer = document.querySelector('#gridContainer');            
-
+            let gridContainer = document.querySelector('#gridContainer');
             function createCssGrid(size) {                                      
                 gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr`;
-                gridContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`;                              
-            
+                gridContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`;            
                 createGridSquares(size);
             }
-
             //create initial grid 32x32 squares
-            createCssGrid(32);
-            
+            createCssGrid(32);            
             function createGridSquares(size) {
-
                 let userClick = false;
-
                 for (let i = 0; i < size**2; i++) {                
                     let gridSquare = document.createElement('div');                
                     gridSquare.classList.add('gridSquare');                                                     
-                    gridContainer.appendChild(gridSquare);      
-
+                    gridContainer.appendChild(gridSquare);
+                    
+                    //check if mouse is up or down which will change the mouseover behaviour
                     gridSquare.addEventListener('mousedown', () => {
                         userClick = true;
                         console.log(userClick);
                         });
-
                         gridSquare.addEventListener('mouseup', () => {
                             console.log(userClick);
                         userClick = false;
-                        });
-
-                    
-                    gridSquare.addEventListener('mouseover', () => {
-                        
+                        });                    
+                    gridSquare.addEventListener('mouseover', () => {                        
                         if(userClick == true) {
-                        if (userColour == "black") {
-                            gridSquare.style.backgroundColor = "black";
-                        } else if (userColour == "red") {
-                            gridSquare.style.backgroundColor = "red";
-                        } else if (userColour == "rainbow") {
-                            
-                            let red = Math.floor((Math.random() * 255) + 1);
-                            let green = Math.floor((Math.random() * 255) + 1);
-                            let blue = Math.floor((Math.random() * 255) + 1);
-                            gridSquare.style.backgroundColor = `rgb(${red}, ${green}, ${blue}`;
-                        } else if(userColour == "white") {
-                            gridSquare.style.backgroundColor = "white";
-                        }
-                    }                    
+                            if (userColour == "black") {
+                                gridSquare.style.backgroundColor = "black";
+                            } else if (userColour == "red") {
+                                gridSquare.style.backgroundColor = "red";
+                            } else if (userColour == "rainbow") {                                
+                                let red = Math.floor((Math.random() * 255) + 1);
+                                let green = Math.floor((Math.random() * 255) + 1);
+                                let blue = Math.floor((Math.random() * 255) + 1);
+                                gridSquare.style.backgroundColor = `rgb(${red}, ${green}, ${blue}`;
+                            } else if(userColour == "white") {
+                                gridSquare.style.backgroundColor = "white";
+                            }
+                        }                    
                     });                              
                 }
             }    
+
             // remove all the old squares before making new ones
             function clearGrid() {                
                 let container = document.querySelector('#gridContainer');                
@@ -84,11 +74,9 @@
                 square.forEach(function(e){
                     container.removeChild(container.lastChild);
                 });
-            }
-                
+            }                
                 document.querySelector('#resizeButton').onclick = function() {                               
-                    let newGrid = prompt("How many squares in each direction should the grid have? (1-128)");
-                
+                    let newGrid = prompt("How many squares in each direction should the grid have? (1-128)");                
                     if(newGrid <= 128 && newGrid >=1) {
                         clearGrid();
                         createCssGrid(newGrid);                    
@@ -96,9 +84,6 @@
                         alert("Please choose a number between 1 and 128");  
                     }                
                 }
-
-                
-
             //listeners for colour changer buttons
             document.querySelector('#black').onclick = function() {
                 userColour = "black";
@@ -109,20 +94,16 @@
             document.querySelector('#rainbow').onclick = function() {
                 userColour = "rainbow";
             }
-
             document.querySelector('#white').onclick = function() {
                 userColour = "white";
             }
-
             //reset grid by setting all to white
             document.querySelector('#resetButton').onclick = function() {                
-                    let square = document.querySelectorAll('.gridSquare');
-                    square.forEach(function(e){                    
-                    e.style.backgroundColor = "white";
-                    
-                    });
-                }
-
+                let square = document.querySelectorAll('.gridSquare');
+                square.forEach(function(e){                    
+                e.style.backgroundColor = "white";                
+                });
+            }
         </script>
     </body>
 </html>
