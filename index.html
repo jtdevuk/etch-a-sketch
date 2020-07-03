@@ -17,6 +17,7 @@
             <button id="resetButton">Clear</button>
             <button id="resizeButton">Change the grid size</button>            
         <div id="coloursBox">
+            <div id="white" class="colours"></div>
             <div id="black" class="colours"></div>
             <div id="red" class="colours"></div>
             <div id="rainbow" class="colours"></div>
@@ -69,6 +70,8 @@
                             let green = Math.floor((Math.random() * 255) + 1);
                             let blue = Math.floor((Math.random() * 255) + 1);
                             gridSquare.style.backgroundColor = `rgb(${red}, ${green}, ${blue}`;
+                        } else if(userColour == "white") {
+                            gridSquare.style.backgroundColor = "white";
                         }
                     }                    
                     });                              
@@ -105,6 +108,10 @@
             }
             document.querySelector('#rainbow').onclick = function() {
                 userColour = "rainbow";
+            }
+
+            document.querySelector('#white').onclick = function() {
+                userColour = "white";
             }
 
             //reset grid by setting all to white

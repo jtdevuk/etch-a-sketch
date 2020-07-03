@@ -70,6 +70,10 @@ body {
         background-color: red;
     }
 
+    #white {
+        background-color: white;
+    }
+
     #rainbow {
         background: linear-gradient(90deg, red, green, blue);;
     }
